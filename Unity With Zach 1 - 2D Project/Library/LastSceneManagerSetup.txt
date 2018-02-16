@@ -1,4 +1,7 @@
 sceneSetups:
 - path: Assets/Zack'sScene.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Ben's Test Scene.unity
   isLoaded: 1
   isActive: 1
