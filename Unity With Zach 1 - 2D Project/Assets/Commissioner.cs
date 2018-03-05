@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Commissioner : MonoBehaviour {
-    public double rLotterySize;
-    public double fLotterySize;
+    public double rTagLimit;
+    public double fTagLimit;
     public int authority;
     public int aRegen;
+
     // Use this for initialization
     void Start () {
-		
-	}
+        rTagLimit = 10;
+        fTagLimit = 10;
+        authority = 10;
+        aRegen = 1;
+    }
 	
-	// Update is called once per frame
-	void Update () {
+    public void CommissionerUpdate()
+    {
+            authority += aRegen;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

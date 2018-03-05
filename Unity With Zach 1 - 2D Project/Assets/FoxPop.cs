@@ -10,8 +10,10 @@ public class FoxPop : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        fCount = 20;
+        fEfficiency = 1;
+        fRabbitsEatenToGrow = 1;
+    }
 	
 	// Update is called once per frame
 	void Update () {

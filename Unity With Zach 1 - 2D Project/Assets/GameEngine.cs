@@ -10,62 +10,107 @@ public class GameEngine : MonoBehaviour {
     int turnTracker = 0;
 
 
+    int CheckGameOver() {
+        /*----------------------------------------------------------------------------------------
+        int checkGameOver() by Benjamin Lewis
+        SUMMARY:  
+        This function serves to determine wether or not the game has ended by game rules
+            0.) This function returns 0 if the game is not over.
+            1.) End condition: unexpected error--this case should not happen.
+            2.) End condition: foxes are extinct
+            3.) End condition: rabbits are extinct
+            4.) End condition: excessive rabbits
+        -----------------------------------------------------------------------------------------*/
+        if (Foxes.fCount <= 0)
+            return 2;
+        if (Rabbits.rCount <= 0)
+            return 3;
+        if (Rabbits.rCount >= RabbitPop.rEXCESSPOINT)
+            return 4;
 
+        return 0;
+    }//close int checkGameOver()
 
-    // Use this for initialization
     void Start () {
-        Rabbits.rCount = 100;
-        Rabbits.rBreedSpeed=1.3;
-        Foxes.fCount = 20;
-        Foxes.fEfficiency = 1;
-        Foxes.fRabbitsEatenToGrow = 1;
-        Hunters.rHunterCount = 10;
-        Hunters.rHunterEffectiveness=1;
-        Hunters.fHunterCount=10;
-        Hunters.fHunterEfficiency=1;
-        Commissioner.rLotterySize = 10;
-        Commissioner.fLotterySize = 10;
+        //Called by Unity upon initialization
+        //nothing happens
     }
 
     void PopulationUpdate()
     {
+        /*------------------------------------------------------------------------------------------------
+         void PopulationUpdate() by Ben Lewis and Zach Bolt
+         
+        This funciton is called by void NewTurn(). Its function is to enact the algorithms for
+        changing the internal values of the RabbitPop class and then FoxPop class. If the populations dip
+        bellow zero, they are set to zero.
+         ------------------------------------------------------------------------------------------------*/
+
+        //Update Rabbit Variables
         Rabbits.rCount = Rabbits.rCount * Rabbits.rBreedSpeed;
-
         Rabbits.rCount = Rabbits.rCount
-            - (Hunters.rHunterCount * Hunters.rHunterEffectiveness * Commissioner.rLotterySize)
+            - (Hunters.rHunterCount * Hunters.rHunterEffectiveness)
             - (Foxes.fCount*Foxes.fEfficiency);
+        if (Rabbits.rCount < 0)
+            Rabbits.rCount = 0;
 
-        Foxes.fCount = Foxes.fCount - Hunters.fHunterCount * Hunters.fHunterEfficiency * Commissioner.fLotterySize;
-        Foxes.fCount = Foxes.fCount * Foxes.fEfficiency / Foxes.fRabbitsEatenToGrow;
-    }
+        //Update Fox Variables
+        Foxes.fCount = Foxes.fCount 
+            - (Hunters.fHunterCount * Hunters.fHunterEfficiency)
+            + (Foxes.fEfficiency / Foxes.fRabbitsEatenToGrow);
+        if (Foxes.fCount < 0)
+            Foxes.fCount = 0;
+
+    }// close void populationUpdate()
+
+
     void NewTurn()
     {
+        /*--------------------------------------------------------------------------------------
+         void NewTurn() by Zach Bolt
+         This function is called by void Update(), which is run every frame by Unity.
+         This function contains 3 function calls
+            1.) PopulationUpdate()
+            2.) RandomEvent()
+            3.) Commissioner.CommissionerUpdate()
+         --------------------------------------------------------------------------------------*/
+
         PopulationUpdate();
-     //   RandomEvent();
-        CommisionerUpdate();
-    }
-    void CommisionerUpdate()
-    {
-        Commissioner.authority += Commissioner.aRegen;
-    }
+        //RandomEvent();
+        Commissioner.CommissionerUpdate();
 
-    // Update is called once per frame
+    }//close void NewTurn()
+
+
+    
     void Update () {
-        if (turnTracker==200)
+        // Update is called once per frame
+        if (CheckGameOver() == 0)
         {
-            NewTurn();
-            turnTracker = 0;
+            if (turnTracker == 200)
+            {
 
-            Debug.Log("Fox Population: ");
-            Debug.Log(Foxes.fCount);
+                NewTurn();
+                turnTracker = 0;
 
-            Debug.Log("Rabbit Population: ");
-            Debug.Log(Rabbits.rCount);
+                Debug.Log("Fox Population: ");
+                Debug.Log(Foxes.fCount);
 
-            Debug.Log("Authority: ");
-            Debug.Log(Commissioner.authority);
-        }
+                Debug.Log("Rabbit Population: ");
+                Debug.Log(Rabbits.rCount);
+
+                Debug.Log("Authority: ");
+                Debug.Log(Commissioner.authority);
+            }//close if(turnTracker)
+            else
+                turnTracker++;
+        }//close if(CheckGameOver)
         else
-        turnTracker++;
-	}
-}
+        {
+            Debug.Log("GAME OVER. End Condition:");
+            Debug.Log(CheckGameOver());
+
+        }//close else(checkGameover)
+	}//close void Update()
+
+}//close GameEngine definition
