@@ -7,6 +7,7 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] RabbitPop Rabbits;
     [SerializeField] HunterPop Hunters;
     [SerializeField] Commissioner Commissioner;
+    [SerializeField] RandomEventGenerator RandomEventGen;
     int turnTracker = 0;
 
 
@@ -71,12 +72,12 @@ public class GameEngine : MonoBehaviour {
          This function is called by void Update(), which is run every frame by Unity.
          This function contains 3 function calls
             1.) PopulationUpdate()
-            2.) RandomEvent()
+            2.) RandomEventGen.RandomEvent();
             3.) Commissioner.CommissionerUpdate()
          --------------------------------------------------------------------------------------*/
 
         PopulationUpdate();
-        //RandomEvent();
+        RandomEventGen.RandomEvent();
         Commissioner.CommissionerUpdate();
 
     }//close void NewTurn()

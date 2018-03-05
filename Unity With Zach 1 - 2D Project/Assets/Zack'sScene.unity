@@ -201,6 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1309130335}
   - component: {fileID: 1309130334}
+  - component: {fileID: 1309130337}
   - component: {fileID: 1309130333}
   - component: {fileID: 1309130332}
   - component: {fileID: 1309130331}
@@ -223,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a448161e5dec814a8306f628379b634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rLotterySize: 0
-  fLotterySize: 0
+  rTagLimit: 0
+  fTagLimit: 0
   authority: 0
   aRegen: 0
 --- !u!114 &1309130331
@@ -284,6 +285,7 @@ MonoBehaviour:
   Rabbits: {fileID: 1309130333}
   Hunters: {fileID: 1309130332}
   Commissioner: {fileID: 1309130330}
+  RandomEventGen: {fileID: 1309130337}
 --- !u!4 &1309130335
 Transform:
   m_ObjectHideFlags: 0
@@ -297,3 +299,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309130337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1309130329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db00c5b9acef66e48be5142dabbc3e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engine: {fileID: 1309130334}

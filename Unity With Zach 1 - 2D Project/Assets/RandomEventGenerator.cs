@@ -22,14 +22,14 @@ public class RandomEventGenerator : MonoBehaviour {
 		
 	}
 
-    string RandomEvent()
+    public string RandomEvent()
     {
         int choice = (int)Random.Range(1,8);
         switch (choice)
         {
             case 1:
                 Hunters.fHunterEfficiency += .3;
-                Hunters.rHunterEffectiveness += .3
+                Hunters.rHunterEffectiveness += .3;
                 return "Illegal Hunters";
 
             case 2:
