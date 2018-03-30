@@ -64,7 +64,7 @@ public class GameEngine : MonoBehaviour {
         //Update Fox Variables
         Foxes.fCount = Foxes.fCount 
             - (Hunters.fHunterCount * Hunters.fHunterEfficiency)
-            + (Foxes.fEfficiency / Foxes.fRabbitsEatenToGrow);
+            + (Foxes.fCount*Foxes.fEfficiency / Foxes.fRabbitsEatenToGrow);
         if (Foxes.fCount < 0)
             Foxes.fCount = 0;
 
@@ -98,11 +98,10 @@ public class GameEngine : MonoBehaviour {
 
     public void FoxTagPlusFive()
     {
-        Debug.Log("FoxTagPlusFive");
         if (Commissioner.authority > 0)
         {
             Commissioner.authority--;
-            Commissioner.fTagLimit = +5;
+            Commissioner.fTagLimit += 5;
         }
     }
 
@@ -111,7 +110,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
         {
             Commissioner.authority--;
-            Commissioner.fTagLimit = -5;
+            Commissioner.fTagLimit -= 5;
         }
     }
 
@@ -120,7 +119,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0)
         {
             Commissioner.authority--;
-            Commissioner.rTagLimit = +5;
+            Commissioner.rTagLimit += 5;
         }
     }
 
@@ -129,7 +128,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
         {
             Commissioner.authority--;
-            Commissioner.rTagLimit = -5;
+            Commissioner.rTagLimit -= 5;
         }
     }
    
