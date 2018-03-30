@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEngine : MonoBehaviour {
     [SerializeField] FoxPop Foxes;
@@ -8,6 +9,11 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] HunterPop Hunters;
     [SerializeField] Commissioner Commissioner;
     [SerializeField] RandomEventGenerator RandomEventGen;
+    [SerializeField] Text DayDisplay;
+    [SerializeField] Text AuthorityDisplay;
+    [SerializeField] Text rTagDisplay;
+    [SerializeField] Text fTagDisplay;
+    [SerializeField] Text EventDisplay;
     int frameCounter = 0;//To BE DELETED SOON
     int turnTracker = 0;
 
@@ -65,7 +71,7 @@ public class GameEngine : MonoBehaviour {
     }// close void populationUpdate()
 
 
-    void NewTurn()
+    public void NewTurn()
     {
         /*--------------------------------------------------------------------------------------
          void NewTurn() by Zach Bolt
@@ -79,39 +85,74 @@ public class GameEngine : MonoBehaviour {
         PopulationUpdate();
         RandomEventGen.RandomEvent();
         Commissioner.CommissionerUpdate();
-        
+
+        Debug.Log("Day:" + turnTracker);
+
+        Debug.Log("Fox Population: " + Foxes.fCount);
+
+        Debug.Log("Rabbit Population: "+ Rabbits.rCount);
+
+        Debug.Log("Authority: "+ Commissioner.authority);
+
     }//close void NewTurn()
 
+    public void FoxTagPlusFive()
+    {
+        Debug.Log("FoxTagPlusFive");
+        if (Commissioner.authority > 0)
+        {
+            Commissioner.authority--;
+            Commissioner.fTagLimit = +5;
+        }
+    }
 
-    
+    public void FoxTagMinusFive()
+    {
+        if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
+        {
+            Commissioner.authority--;
+            Commissioner.fTagLimit = -5;
+        }
+    }
+
+    public void RabbitTagPlusFive()
+    {
+        if (Commissioner.authority > 0)
+        {
+            Commissioner.authority--;
+            Commissioner.rTagLimit = +5;
+        }
+    }
+
+    public void RabbitTagMinusFive()
+    {
+        if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
+        {
+            Commissioner.authority--;
+            Commissioner.rTagLimit = -5;
+        }
+    }
+   
     void Update () {
         // Update is called once per frame
         if (CheckGameOver() == 0)
         {
-            if (frameCounter == 200)
+            if (frameCounter == 10)
             {
-                
-                NewTurn();
+                DayDisplay.text = turnTracker.ToString();
+                AuthorityDisplay.text = Commissioner.authority.ToString();
+                rTagDisplay.text = Commissioner.rTagLimit.ToString();
+                fTagDisplay.text = Commissioner.fTagLimit.ToString();
                 frameCounter = 0;
 
-                Debug.Log("Day:" + turnTracker);
 
-                Debug.Log("Fox Population: ");
-                Debug.Log(Foxes.fCount);
-
-                Debug.Log("Rabbit Population: ");
-                Debug.Log(Rabbits.rCount);
-
-                Debug.Log("Authority: ");
-                Debug.Log(Commissioner.authority);
             }//close if(turnTracker)
             else
                 frameCounter++;
         }//close if(CheckGameOver)
         else
         {
-            Debug.Log("GAME OVER. End Condition:");
-           Debug.Log(CheckGameOver());
+           EventDisplay.text = "Game over." + CheckGameOver();
 
         }//close else(checkGameover)
 	}//close void Update()
