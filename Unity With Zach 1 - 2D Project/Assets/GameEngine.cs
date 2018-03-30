@@ -8,8 +8,8 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] HunterPop Hunters;
     [SerializeField] Commissioner Commissioner;
     [SerializeField] RandomEventGenerator RandomEventGen;
+    int frameCounter = 0;//To BE DELETED SOON
     int turnTracker = 0;
-
 
     int CheckGameOver() {
         /*----------------------------------------------------------------------------------------
@@ -75,11 +75,11 @@ public class GameEngine : MonoBehaviour {
             2.) RandomEventGen.RandomEvent();
             3.) Commissioner.CommissionerUpdate()
          --------------------------------------------------------------------------------------*/
-
+        turnTracker++;
         PopulationUpdate();
         RandomEventGen.RandomEvent();
         Commissioner.CommissionerUpdate();
-
+        
     }//close void NewTurn()
 
 
@@ -88,11 +88,13 @@ public class GameEngine : MonoBehaviour {
         // Update is called once per frame
         if (CheckGameOver() == 0)
         {
-            if (turnTracker == 200)
+            if (frameCounter == 200)
             {
-
+                
                 NewTurn();
-                turnTracker = 0;
+                frameCounter = 0;
+
+                Debug.Log("Day:" + turnTracker);
 
                 Debug.Log("Fox Population: ");
                 Debug.Log(Foxes.fCount);
@@ -104,12 +106,12 @@ public class GameEngine : MonoBehaviour {
                 Debug.Log(Commissioner.authority);
             }//close if(turnTracker)
             else
-                turnTracker++;
+                frameCounter++;
         }//close if(CheckGameOver)
         else
         {
             Debug.Log("GAME OVER. End Condition:");
-            Debug.Log(CheckGameOver());
+           Debug.Log(CheckGameOver());
 
         }//close else(checkGameover)
 	}//close void Update()
