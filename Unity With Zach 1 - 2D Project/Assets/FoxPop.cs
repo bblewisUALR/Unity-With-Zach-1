@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FoxPop : MonoBehaviour {
 
-    public double fCount;
+    public int fCount;
     public double fEfficiency;
-    public double fRabbitsEatenToGrow;
+    public int fRabbitsEatenToGrow;
 
     // Use this for initialization
     void Start () {
