@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RabbitPop : MonoBehaviour {
-    public int rCount;
+    public double rCount;
     public double rBreedSpeed;
-    public const int rEXCESSPOINT = 200000;
+    public double rEXCESSPOINT = 200000;
 
     // Use this for initialization
     void Start () {

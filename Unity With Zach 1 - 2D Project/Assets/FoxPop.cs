@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class FoxPop : MonoBehaviour {
 
-    public int fCount;
-    public double fEfficiency;
-    public int fRabbitsEatenToGrow;
+    public double fCount;
+    public double fEffectiveness;
+    public double fRabbitsEatenToGrow;
 
     // Use this for initialization
     void Start () {
         fCount = 20;
-        fEfficiency = 1;
+        fEffectiveness = .5;
         fRabbitsEatenToGrow = 1;
     }
 	

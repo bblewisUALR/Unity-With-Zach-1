@@ -14,6 +14,7 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] Text rTagDisplay;
     [SerializeField] Text fTagDisplay;
     [SerializeField] Text EventDisplay;
+    [SerializeField] Text GameData;
     int frameCounter = 0;//To BE DELETED SOON
     int turnTracker = 0;
 
@@ -29,18 +30,48 @@ public class GameEngine : MonoBehaviour {
             4.) End condition: excessive rabbits
         -----------------------------------------------------------------------------------------*/
         if (Foxes.fCount <= 0)
+        {
+            EventDisplay.text = "Game Over! No more foxes.";
             return 2;
+        }
         if (Rabbits.rCount <= 0)
+        {
+            EventDisplay.text = "Game Over! No more rabbits.";
             return 3;
-        if (Rabbits.rCount >= RabbitPop.rEXCESSPOINT)
+        }
+        if (Rabbits.rCount >= Rabbits.rEXCESSPOINT)
+        {
+            EventDisplay.text = "Game Over! Too many rabbits.";
             return 4;
-
+        }
         return 0;
     }//close int checkGameOver()
 
     void Start () {
         //Called by Unity upon initialization
         //nothing happens
+    }
+
+    public void StartOver()
+    {
+        turnTracker = 0;
+
+        EventDisplay.text = "";
+        DayDisplay.text = turnTracker.ToString();
+
+        Rabbits.rCount = 100;
+        Rabbits.rBreedSpeed = 1.3;
+
+        Foxes.fCount = 20;
+        Foxes.fEffectiveness = 1;
+        Foxes.fRabbitsEatenToGrow = 1;
+
+        Commissioner.rTagLimit = 10;
+        Commissioner.fTagLimit = 10;
+        Commissioner.authority = 10;
+        Commissioner.aRegen = 1;
+
+        AuthorityDisplay.text = Commissioner.authority.ToString();
     }
 
     void PopulationUpdate()
@@ -56,17 +87,25 @@ public class GameEngine : MonoBehaviour {
         //Update Rabbit Variables
         Rabbits.rCount = Rabbits.rCount * Rabbits.rBreedSpeed;
         Rabbits.rCount = Rabbits.rCount
-            - (Hunters.rHunterCount * Hunters.rHunterEffectiveness)
-            - (Foxes.fCount*Foxes.fEfficiency);
+            - (Commissioner.rTagLimit * Hunters.rHunterEffectiveness)
+            //(Hunters.rHunterCount * Hunters.rHunterEffectiveness)
+            - (Foxes.fCount*Foxes.fEffectiveness);
         if (Rabbits.rCount < 0)
             Rabbits.rCount = 0;
 
         //Update Fox Variables
-        Foxes.fCount = Foxes.fCount 
-            - (Hunters.fHunterCount * Hunters.fHunterEfficiency)
-            + (Foxes.fCount*Foxes.fEfficiency / Foxes.fRabbitsEatenToGrow);
+        Foxes.fCount = Foxes.fCount
+            - (Commissioner.fTagLimit * Hunters.fHunterEffectiveness);
+        Foxes.fCount = Foxes.fCount
+            + (Foxes.fCount*Foxes.fEffectiveness / Foxes.fRabbitsEatenToGrow);
         if (Foxes.fCount < 0)
             Foxes.fCount = 0;
+
+        //Reset "Health" Variables
+        Foxes.fEffectiveness = .5;
+        Rabbits.rBreedSpeed = 1.3;
+        Hunters.fHunterEffectiveness = 1;
+        Hunters.rHunterEffectiveness = 1;
 
     }// close void populationUpdate()
 
@@ -75,25 +114,19 @@ public class GameEngine : MonoBehaviour {
     {
         /*--------------------------------------------------------------------------------------
          void NewTurn() by Zach Bolt
-         This function is called by void Update(), which is run every frame by Unity.
+         This function is called by button click.
          This function contains 3 function calls
             1.) PopulationUpdate()
             2.) RandomEventGen.RandomEvent();
             3.) Commissioner.CommissionerUpdate()
          --------------------------------------------------------------------------------------*/
-        turnTracker++;
-        PopulationUpdate();
-        RandomEventGen.RandomEvent();
-        Commissioner.CommissionerUpdate();
-
-        Debug.Log("Day:" + turnTracker);
-
-        Debug.Log("Fox Population: " + Foxes.fCount);
-
-        Debug.Log("Rabbit Population: "+ Rabbits.rCount);
-
-        Debug.Log("Authority: "+ Commissioner.authority);
-
+        if (CheckGameOver() == 0)
+        {
+            turnTracker++;
+            PopulationUpdate();
+            RandomEventGen.RandomEvent();
+            Commissioner.CommissionerUpdate();
+        }
     }//close void NewTurn()
 
     public void FoxTagPlusFive()
@@ -125,7 +158,7 @@ public class GameEngine : MonoBehaviour {
 
     public void RabbitTagMinusFive()
     {
-        if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
+        if (Commissioner.authority > 0 && Commissioner.rTagLimit > 0)
         {
             Commissioner.authority--;
             Commissioner.rTagLimit -= 5;
@@ -134,26 +167,11 @@ public class GameEngine : MonoBehaviour {
    
     void Update () {
         // Update is called once per frame
-        if (CheckGameOver() == 0)
-        {
-            if (frameCounter == 10)
-            {
-                DayDisplay.text = turnTracker.ToString();
-                AuthorityDisplay.text = Commissioner.authority.ToString();
-                rTagDisplay.text = Commissioner.rTagLimit.ToString();
-                fTagDisplay.text = Commissioner.fTagLimit.ToString();
-                frameCounter = 0;
-
-
-            }//close if(turnTracker)
-            else
-                frameCounter++;
-        }//close if(CheckGameOver)
-        else
-        {
-           EventDisplay.text = "Game over." + CheckGameOver();
-
-        }//close else(checkGameover)
+        GameData.text = "Foxes=" + Foxes.fCount.ToString() + "\n" + "Rabbits=" + Rabbits.rCount.ToString();
+        DayDisplay.text = turnTracker.ToString();
+        AuthorityDisplay.text = Commissioner.authority.ToString();
+        rTagDisplay.text = Commissioner.rTagLimit.ToString();
+        fTagDisplay.text = Commissioner.fTagLimit.ToString();
 	}//close void Update()
 
 }//close GameEngine definition

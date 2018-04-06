@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RandomEventGenerator : MonoBehaviour {
-    // Use this for initialization
+
+    [SerializeField] Text EventDisplay;
     [SerializeField] GameEngine engine;
+
     FoxPop Foxes;
     RabbitPop Rabbits;
     HunterPop Hunters;
     Commissioner Player;
+
     void Start () {
         Foxes = engine.GetComponent<FoxPop>();
         Rabbits = engine.GetComponent<RabbitPop>();
@@ -22,54 +26,59 @@ public class RandomEventGenerator : MonoBehaviour {
 		
 	}
 
-    public string RandomEvent()
+    public void RandomEvent()
     {
         int choice = (int)Random.Range(1,8);
         switch (choice)
         {
             case 1:
-                Hunters.fHunterEfficiency += .3;
-                Hunters.rHunterEffectiveness += .3;
-                return "Illegal Hunters";
+                Hunters.fHunterEffectiveness += .25;
+                Hunters.rHunterEffectiveness += .25;
+                EventDisplay.text = "Illegal Hunters";
+                break;
 
             case 2:
                 Rabbits.rBreedSpeed -= .5;
-                return "Rabbit disease";
-
+                EventDisplay.text = "Rabbit disease";
+                break;
             case 3:
-                Foxes.fEfficiency -= .5;
-                return "Fox disease";
-
+                Foxes.fEffectiveness -= .5;
+                EventDisplay.text = "Fox disease";
+                break;
             case 4:
                 if (Rabbits.rCount > 50000)
                 {
                     Player.aRegen -= 1;
-                    return "Farmers mad about rabbits";
+                    EventDisplay.text = "Farmers mad about rabbits";
                 }
                 else
-                    return "No Event Triggered";
+                    EventDisplay.text = "No Event Triggered";
+                break;
 
             case 5:
                 Rabbits.rBreedSpeed += .5;
-                return "Rabbits breeding like rabbits";
-
+                EventDisplay.text = "Rabbits breeding like rabbits";
+                break;
             case 6:
-                Foxes.fEfficiency += .5;
-                return "Foxes breeding like rabbits";
-
+                Foxes.fEffectiveness += .5;
+                EventDisplay.text = "Foxes breeding like rabbits";
+                break;
             case 7:
                 if (Foxes.fCount > 10000)
                 {
-                    Hunters.fHunterCount -= 10;
-                    return "Foxes attack hunters";
+                    Hunters.fHunterEffectiveness -= .5;
+                    EventDisplay.text = "Foxes attempt a coup, hunters flee.";
                 }
                 else
-                    return "No Event Triggered";
+                    EventDisplay.text = "Foxes resent the hunters. Tensions are high.";
+                break;
             case 8:
                 Player.aRegen += 1;
-                return "Increasing Authority";
+                EventDisplay.text = "Increasing Authority";
+                break;
             default:
-                return "No Event Triggered";
+                EventDisplay.text = "No Event Triggered";
+                break;
         }
     }
 }

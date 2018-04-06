@@ -9,8 +9,8 @@ public class TotemManager : MonoBehaviour {
     [SerializeField]
     RabbitPop Rabbits;
 
-    int FoxTotemCount = 0;
-    int RabbitTotemCount = 0;
+    double FoxTotemCount = 0;
+    double RabbitTotemCount = 0;
 
     int FoxTotemWeight = 20;
     int RabbitTotemWeight = 200;
