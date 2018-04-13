@@ -60,17 +60,17 @@ public class GameEngine : MonoBehaviour {
         EventDisplay.text = "";
         DayDisplay.text = turnTracker.ToString();
 
-        Rabbits.rCount = 100;
+        Rabbits.rCount = 1000;
         Rabbits.rBreedSpeed = 1.3;
 
-        Foxes.fCount = 20;
+        Foxes.fCount = 200;
         Foxes.fEffectiveness = 1;
         Foxes.fRabbitsEatenToGrow = 1;
 
-        Commissioner.rTagLimit = 10;
-        Commissioner.fTagLimit = 10;
-        Commissioner.authority = 10;
-        Commissioner.aRegen = 1;
+        Commissioner.rTagLimit = 50;
+        Commissioner.fTagLimit = 50;
+        Commissioner.authority = 5;
+        Commissioner.aRegen = 2;
 
         AuthorityDisplay.text = Commissioner.authority.ToString();
     }
@@ -135,7 +135,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0)
         {
             Commissioner.authority--;
-            Commissioner.fTagLimit += 5;
+            Commissioner.fTagLimit += 50;
         }
     }
 
@@ -144,7 +144,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0 && Commissioner.fTagLimit > 0)
         {
             Commissioner.authority--;
-            Commissioner.fTagLimit -= 5;
+            Commissioner.fTagLimit -= 50;
         }
     }
 
@@ -153,7 +153,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0)
         {
             Commissioner.authority--;
-            Commissioner.rTagLimit += 5;
+            Commissioner.rTagLimit += 50;
         }
     }
 
@@ -162,7 +162,7 @@ public class GameEngine : MonoBehaviour {
         if (Commissioner.authority > 0 && Commissioner.rTagLimit > 0)
         {
             Commissioner.authority--;
-            Commissioner.rTagLimit -= 5;
+            Commissioner.rTagLimit -= 50;
         }
     }
    

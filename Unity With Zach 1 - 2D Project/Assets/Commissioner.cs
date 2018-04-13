@@ -10,10 +10,10 @@ public class Commissioner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        rTagLimit = 10;
-        fTagLimit = 10;
-        authority = 10;
-        aRegen = 1;
+        rTagLimit = 50;
+        fTagLimit = 50;
+        authority = 5;
+        aRegen = 2;
     }
 	
     public void CommissionerUpdate()

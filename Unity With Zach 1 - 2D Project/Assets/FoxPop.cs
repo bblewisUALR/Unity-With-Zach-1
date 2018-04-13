@@ -10,7 +10,7 @@ public class FoxPop : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        fCount = 20;
+        fCount = 200;
         fEffectiveness = .5;
         fRabbitsEatenToGrow = 1;
     }

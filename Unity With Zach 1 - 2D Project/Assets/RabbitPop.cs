@@ -9,7 +9,7 @@ public class RabbitPop : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        rCount = 100;
+        rCount = 1000;
         rBreedSpeed = 1.3;
     }
 	

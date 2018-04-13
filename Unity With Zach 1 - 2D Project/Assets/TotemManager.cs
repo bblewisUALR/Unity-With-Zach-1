@@ -12,45 +12,53 @@ public class TotemManager : MonoBehaviour {
     double FoxTotemCount = 0;
     double RabbitTotemCount = 0;
 
-    int FoxTotemWeight = 20;
-    int RabbitTotemWeight = 200;
+    int FoxTotemWeight = 50 ;
+    int RabbitTotemWeight = 100;
 
-    List<Totem> FoxTotems = new List<Totem>();
-    List<Totem> RabbitTotems = new List<Totem>();
+    List<GameObject> FoxTotems = new List<GameObject>();
+    List<GameObject> RabbitTotems = new List<GameObject>();
 
-    void Draw()
+    public void Draw()
     {
-        FoxTotemCount = Foxes.fCount / FoxTotemWeight;
-        RabbitTotemCount = Rabbits.rCount / RabbitTotemWeight;
+        while (RabbitTotemCount<Rabbits.rCount / RabbitTotemWeight)
+        {        
+            GameObject go = (GameObject)Instantiate(Resources.Load("rabbit"));
+            go.transform.Translate((float) Random.Range((float)187.88, (float)191.23), (float)219.50, 0);
+            RabbitTotems.Add(go);
+            RabbitTotemCount++;
+        }
 
-        while (FoxTotems.Count < FoxTotemCount)
+        while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight))
         {
-            var newFoxTotem = new Totem();
-            newFoxTotem.mySpecies = Totem.Species.fox;
-            newFoxTotem.Draw();
-            FoxTotems.Add(newFoxTotem);
-
-        }//close while fox <
-
-        while (RabbitTotems.Count < RabbitTotemCount)
+            Destroy(RabbitTotems[0]);
+            RabbitTotems.RemoveAt(0);
+            RabbitTotemCount--;
+        }
+        while (FoxTotemCount < Foxes.fCount / FoxTotemWeight)
         {
-            var newRabbitTotem = new Totem();
-            newRabbitTotem.mySpecies = Totem.Species.rabbit;
-            newRabbitTotem.Draw();
-            RabbitTotems.Add(newRabbitTotem);
+            GameObject go = (GameObject)Instantiate(Resources.Load("fox"));
+            go.transform.Translate((float)Random.Range((float)193.25, (float)196.27), (float)219.50, 0);
+            FoxTotems.Add(go);
+            FoxTotemCount++;
+        }
 
-        }//close while rabbit <
-
+        while (FoxTotemCount > Foxes.fCount / FoxTotemWeight)
+        {
+            Destroy(FoxTotems[0]);
+            FoxTotems.RemoveAt(0);
+            FoxTotemCount--;
+        }
 
     }//close Draw()
 
 	// Use this for initialization
 	void Start () {
-		
+        Draw();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+
+    }
 }
