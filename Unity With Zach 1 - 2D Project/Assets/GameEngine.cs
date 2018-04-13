@@ -14,7 +14,8 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] Text rTagDisplay;
     [SerializeField] Text fTagDisplay;
     [SerializeField] Text EventDisplay;
-    [SerializeField] Text GameData;
+    [SerializeField] Text RabbitPopLabel;
+    [SerializeField] Text FoxPopLabel;
     int frameCounter = 0;//To BE DELETED SOON
     int turnTracker = 0;
 
@@ -167,7 +168,8 @@ public class GameEngine : MonoBehaviour {
    
     void Update () {
         // Update is called once per frame
-        GameData.text = "Foxes=" + Foxes.fCount.ToString() + "\n" + "Rabbits=" + Rabbits.rCount.ToString();
+        RabbitPopLabel.text = "Rabbits=" + Rabbits.rCount.ToString();
+        FoxPopLabel.text = "Foxes=" + Foxes.fCount.ToString(); 
         DayDisplay.text = turnTracker.ToString();
         AuthorityDisplay.text = Commissioner.authority.ToString();
         rTagDisplay.text = Commissioner.rTagLimit.ToString();
