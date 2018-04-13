@@ -20,21 +20,21 @@ public class TotemManager : MonoBehaviour {
 
     public void Draw()
     {
-        while (RabbitTotemCount<Rabbits.rCount / RabbitTotemWeight)
-        {        
+        while (RabbitTotemCount<Rabbits.rCount / RabbitTotemWeight && (RabbitTotemCount + 1)< Rabbits.rCount / RabbitTotemWeight)
+        {   
             GameObject go = (GameObject)Instantiate(Resources.Load("rabbit"));
             go.transform.Translate((float) Random.Range((float)187.88, (float)191.23), (float)219.50, 0);
             RabbitTotems.Add(go);
             RabbitTotemCount++;
         }
 
-        while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight))
+        while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight) && (RabbitTotemCount - 1) > Rabbits.rCount / RabbitTotemWeight)
         {
             Destroy(RabbitTotems[0]);
             RabbitTotems.RemoveAt(0);
             RabbitTotemCount--;
         }
-        while (FoxTotemCount < Foxes.fCount / FoxTotemWeight)
+        while (FoxTotemCount < Foxes.fCount / FoxTotemWeight && (FoxTotemCount + 1) < Foxes.fCount / FoxTotemWeight)
         {
             GameObject go = (GameObject)Instantiate(Resources.Load("fox"));
             go.transform.Translate((float)Random.Range((float)193.25, (float)196.27), (float)219.50, 0);
@@ -42,7 +42,7 @@ public class TotemManager : MonoBehaviour {
             FoxTotemCount++;
         }
 
-        while (FoxTotemCount > Foxes.fCount / FoxTotemWeight)
+        while (FoxTotemCount > Foxes.fCount / FoxTotemWeight && (FoxTotemCount - 1) > Foxes.fCount / FoxTotemWeight)
         {
             Destroy(FoxTotems[0]);
             FoxTotems.RemoveAt(0);

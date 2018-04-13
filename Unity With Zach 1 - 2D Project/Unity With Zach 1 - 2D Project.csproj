@@ -225,6 +225,8 @@
     <Compile Include="Assets\HunterPop.cs" />
     <Compile Include="Assets\RabbitPop.cs" />
     <Compile Include="Assets\RandomEventGenerator.cs" />
+    <Compile Include="Assets\Totem.cs" />
+    <Compile Include="Assets\TotemManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
