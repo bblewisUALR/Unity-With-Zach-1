@@ -29,6 +29,16 @@ public class Totem : MonoBehaviour {
 
     public void GetEaten()
     {
+        if (mySpecies == Species.fox)
+            GetComponent<SpriteRenderer>().sprite = ShotFox;
+        else
+            GetComponent<SpriteRenderer>().sprite = ChompedRabbit;
+        StartCoroutine(PauseThenDelete());
+    }
+
+    IEnumerator PauseThenDelete()
+    {
+        yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
     }
 

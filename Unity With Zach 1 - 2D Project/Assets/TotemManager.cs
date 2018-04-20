@@ -28,7 +28,7 @@ public class TotemManager : MonoBehaviour {
             RabbitTotemCount++;
         }
 
-        while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight) && (RabbitTotemCount - 1) > Rabbits.rCount / RabbitTotemWeight)
+        while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight) && (RabbitTotemCount - 1) >= Rabbits.rCount / RabbitTotemWeight)
         {
             RabbitTotems[0].GetComponent<Totem>().GetEaten();
             RabbitTotems.RemoveAt(0);
@@ -42,9 +42,9 @@ public class TotemManager : MonoBehaviour {
             FoxTotemCount++;
         }
 
-        while (FoxTotemCount > Foxes.fCount / FoxTotemWeight && (FoxTotemCount - 1) > Foxes.fCount / FoxTotemWeight)
+        while (FoxTotemCount > Foxes.fCount / FoxTotemWeight && (FoxTotemCount - 1) >= Foxes.fCount / FoxTotemWeight)
         {
-            Destroy(FoxTotems[0]);
+            FoxTotems[0].GetComponent<Totem>().GetEaten();
             FoxTotems.RemoveAt(0);
             FoxTotemCount--;
         }

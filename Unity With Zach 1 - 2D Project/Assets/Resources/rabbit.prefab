@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edc15c36ddaea848b8fa626b1cee003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChompedRabbit: {fileID: 21300000, guid: 38f6e84a086e95f4e9a36472f34cfbf9, type: 3}
+  ShotFox: {fileID: 21300000, guid: 4ad848968ff259f4a8521344346adce8, type: 3}
   mySpecies: 1
 --- !u!212 &212385621296802034
 SpriteRenderer:

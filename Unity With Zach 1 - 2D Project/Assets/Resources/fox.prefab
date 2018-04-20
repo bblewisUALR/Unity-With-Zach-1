@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212445003460362296}
   - component: {fileID: 50232490689708726}
   - component: {fileID: 70893531662776278}
+  - component: {fileID: 114857348706650334}
   m_Layer: 0
   m_Name: fox
   m_TagString: Untagged
@@ -77,6 +78,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.9121063, y: -0.51081437}
   m_Size: {x: 11.337768, y: 5.643172}
   m_Direction: 1
+--- !u!114 &114857348706650334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640747778737090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edc15c36ddaea848b8fa626b1cee003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChompedRabbit: {fileID: 21300000, guid: 38f6e84a086e95f4e9a36472f34cfbf9, type: 3}
+  ShotFox: {fileID: 21300000, guid: 4ad848968ff259f4a8521344346adce8, type: 3}
+  mySpecies: 0
 --- !u!212 &212445003460362296
 SpriteRenderer:
   m_ObjectHideFlags: 1
