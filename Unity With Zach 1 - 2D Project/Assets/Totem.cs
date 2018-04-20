@@ -5,6 +5,8 @@ using UnityEngine;
 public class Totem : MonoBehaviour {
 
     public enum Species { fox, rabbit};
+    [SerializeField] Sprite ChompedRabbit;
+    [SerializeField] Sprite ShotFox;
 
     public Species mySpecies;
 
@@ -25,7 +27,10 @@ public class Totem : MonoBehaviour {
         }//close switch
     }
 
-
+    public void GetEaten()
+    {
+        Destroy(this.gameObject);
+    }
 
     // Use this for initialization
     void Start () {

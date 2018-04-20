@@ -30,7 +30,7 @@ public class TotemManager : MonoBehaviour {
 
         while (RabbitTotemCount > (Rabbits.rCount / RabbitTotemWeight) && (RabbitTotemCount - 1) > Rabbits.rCount / RabbitTotemWeight)
         {
-            Destroy(RabbitTotems[0]);
+            RabbitTotems[0].GetComponent<Totem>().GetEaten();
             RabbitTotems.RemoveAt(0);
             RabbitTotemCount--;
         }
