@@ -18,6 +18,9 @@ public class GameEngine : MonoBehaviour {
     [SerializeField] Text FoxPopLabel;
     int frameCounter = 0;//To BE DELETED SOON
     int turnTracker = 0;
+    [SerializeField] GameObject BronzeTrophy;
+    [SerializeField] GameObject SilverTrophy;
+    [SerializeField] GameObject GoldTrophy;
 
     int CheckGameOver() {
         /*----------------------------------------------------------------------------------------
@@ -127,6 +130,12 @@ public class GameEngine : MonoBehaviour {
             PopulationUpdate();
             RandomEventGen.RandomEvent();
             Commissioner.CommissionerUpdate();
+            if (turnTracker == 5)
+                BronzeTrophy.SetActive(true);
+            if (turnTracker == 15)
+                SilverTrophy.SetActive(true);
+            if (turnTracker == 25)
+                GoldTrophy.SetActive(true);
         }
     }//close void NewTurn()
 
