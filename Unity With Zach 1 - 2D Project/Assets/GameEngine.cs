@@ -76,6 +76,10 @@ public class GameEngine : MonoBehaviour {
         Commissioner.aRegen = 2;
 
         AuthorityDisplay.text = Commissioner.authority.ToString();
+
+        BronzeTrophy.SetActive(false);
+        SilverTrophy.SetActive(false);
+        GoldTrophy.SetActive(false);
     }
 
     void PopulationUpdate()
@@ -131,11 +135,20 @@ public class GameEngine : MonoBehaviour {
             RandomEventGen.RandomEvent();
             Commissioner.CommissionerUpdate();
             if (turnTracker == 5)
+            {
+                BronzeTrophy.transform.position.Set((float)Random.Range((float)188.18, (float)189.02), (float)214.68, 0);
                 BronzeTrophy.SetActive(true);
+            }
             if (turnTracker == 15)
+            {
+                SilverTrophy.transform.position.Set((float)Random.Range((float)188.18, (float)189.02), (float)214.68, 0);
                 SilverTrophy.SetActive(true);
+            }
             if (turnTracker == 25)
+            {
+                GoldTrophy.transform.position.Set((float)Random.Range((float)188.18, (float)189.02), (float)214.68, 0);
                 GoldTrophy.SetActive(true);
+            }
         }
     }//close void NewTurn()
 
